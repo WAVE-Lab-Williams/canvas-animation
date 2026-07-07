@@ -71,34 +71,29 @@ function runSingleTrial(
         } // on finish end
     }; // dispCircle end
 
-    var dispCircle = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: `<img src="${thisStim}" style="width: ${imgWidth}px;" />`,
-        choices: ['f', 'j'],
-        stimulus_duration: stimDuration, // only use stimulus_duration when you want the image on screen display to be desynced from the trial_duration, will go hidden after this time.
-        trial_duration: null, // most of the time, you will have trial_duration set to the display time, and no stimulus duration at all.
+    var dispCircleAnimation = {
+        type: jsPsychCanvasKeyboardResponse,
+        stimulus: function(c) {
+            var ctx = c.getContext("2d");
+            var simple_settings = {
+                thisShape: "circle", 
+                shapeSize: 50,
+                animationLength: 10000, //ms
+                shapeColor: "ff0040"
+            };
+            createAnimation(ctx, h/2, w/2, simple_settings);
+
+        },
+        canvas_size: [h/2, w/2],
+        choices: ['q'],
+        trial_duration: null,
         response_ends_trial: true,
-        prompt: `${persistent_prompt}`,
+        prompt: "press q to continue",
         data: {
             trial_category: 'answer'+trialType,
-            trial_stimulus: thisStim,
-            trial_duration: stimDuration, // you only need to include this line to overlay trial_duration if stimulus_duration is different than trial_duration, and you actually want to record stimulus_duration
-            correct_response: function(){ 
-                if (stimColor === 'blue') {
-                    return 'f';
-                } else if (stimColor === 'orange') {
-                    return 'j';
-                }
-            }, //correct response end
-        }, // data end
-        on_finish: function(data){
-            if (jsPsych.pluginAPI.compareKeys(data.response, data.correct_response)){
-                data.thisAcc = 1;
-            } else {
-                data.thisAcc = 2;
-            }
-        } // on finish end
-    }; // dispCircle end
+            trial_stimulus: thisStim
+        }
+    }; // dispCircleAnimation end
 
     var prestim = {
         type: jsPsychHtmlKeyboardResponse,
