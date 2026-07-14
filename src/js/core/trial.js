@@ -122,7 +122,7 @@ function runSingleTrial(
     timelineTrialsToPush.push(cursor_off);
     timelineTrialsToPush.push(prestim);
     timelineTrialsToPush.push(fixation);
-    timelineTrialsToPush.push(dispCircle);
+    timelineTrialsToPush.push(dispCircleAnimation);
     // timelineTrialsToPush.push(dispCircleSlider); // if you wanted to use the slider reproduction measurement tool
     timelineTrialsToPush.push(cursor_on);
 
