@@ -120,6 +120,43 @@ function runSingleTrial(
         }
     };
 
+    /*--------------------------- Canvas Animation Teaching Demo ---------------------------
+      This trial shows a shape (circle/square/triangle) traveling across an
+      HTML5 canvas, using jsPsych's canvas-keyboard-response plugin. All of
+      the actual drawing/movement logic (the interesting part, for teaching
+      purposes) lives in createCanvasAnimation(), defined in
+      src/js/core/animation.js -- read that file for the full step-by-step
+      walkthrough. This trial object just wires that logic up to jsPsych:
+        - `stimulus` runs once the canvas is on the page, so that's where we
+          create the animation and start it.
+        - the animation stops itself once `durationMs` has elapsed (see
+          Step 4 in animation.js), so this trial doesn't need an `on_finish`
+          to stop it -- it's already stopped well before the participant
+          responds.
+    -----------------------------------------------------------------------------------*/
+    var ANIMATION_DURATION_MS = 3000; // how long the shape takes to travel from its start to end position
+
+    var canvasAnimationTrial = {
+        type: jsPsychCanvasKeyboardResponse,
+        canvas_size: [600, 800], // NOTE THAT THIS IS HEIGHT FIRST, THEN WIDTH. WHICH IS BS.
+        choices: ['q'],
+        prompt: '<p>Watch the shape move. Press "q" to continue.</p>',
+        trial_duration: null,
+        response_ends_trial: true,
+        data: {
+            trial_category: 'canvas_animation_demo' + trialType,
+        },
+        stimulus: function (c) {
+            var ctx = c.getContext('2d');
+            var settings_simple = {
+                shapeType: 'circle',                 // which shape to draw -- 'circle', 'square', or 'triangle'
+                shapeSize: 50,                       // pixel "diameter" of the shape
+                durationMs: ANIMATION_DURATION_MS,   // how long the trip from start to end position takes
+            }
+            var animation = createCanvasAnimation(ctx, 800, 600, settings_simple); // note that this is width then height, because that just makes more sense
+            animation.start();
+        },
+    }; // canvasAnimationTrial end
 
     /*--------------------------- push single trial sequence ---------------------------*/
 
@@ -127,7 +164,8 @@ function runSingleTrial(
     timelineTrialsToPush.push(cursor_off);
     timelineTrialsToPush.push(prestim);
     timelineTrialsToPush.push(fixation);
-    timelineTrialsToPush.push(dispCircle);
+    // timelineTrialsToPush.push(dispCircle);
+    timelineTrialsToPush.push(canvasAnimationTrial);
     // timelineTrialsToPush.push(dispCircleSlider); // if you wanted to use the slider reproduction measurement tool
     timelineTrialsToPush.push(cursor_on);
 

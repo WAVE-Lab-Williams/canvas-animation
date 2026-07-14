@@ -6,8 +6,8 @@ Defining Parameter Variables
 
 var stimFolder = 'src/assets/stimuli/circles/'
 
-var runIntro = true;
-var runInstr = true;
+var runIntro = false;
+var runInstr = false;
 var runExpt = true;
 var runClose = true;
 var runPreload = true;
