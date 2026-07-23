@@ -76,10 +76,10 @@ function runSingleTrial(
         stimulus: function(c) {
             var ctx = c.getContext("2d");
             var simple_settings = {
-                thisShape: "circle", 
-                shapeSize: 50,
-                animationLength: 10000, //ms
-                shapeColor: "ff0040"
+                thisShape: "png", 
+                shapeSize: 150,
+                animationLength: 20000, //ms
+                shapeColor: "#ff0040"
             };
             var animation = createAnimation(ctx, h/2, w/2, simple_settings);
             animation.start()
