@@ -25,6 +25,8 @@ function createAnimation(
         ctx.shadowBlur = 0;
         ctx.shadowOffsetY = 0;
         
+    
+
         ctx.strokeRect(inset_displacement, inset_displacement, canvas_width-border_width, canvas_height-border_width);
         ctx.fill();
         ctx.fillStyle = "green"
@@ -43,6 +45,9 @@ function createAnimation(
         tree3.src = "C:/Users/mcpro/OneDrive/Documents/WAVE LAB/Code/canvas-animation/src/assets/stimuli/evergreen_tree.png";
         ctx.drawImage(tree3, w/8,  h/8, shape.size, shape.size);
 
+        ctx.font = "50px Tahoma";
+        ctx.fillStyle = "black"
+        ctx.fillText("Society.", canvas_width/2, canvas_height/2);
 
     };
 
@@ -110,8 +115,10 @@ function createAnimation(
     var imgPath = "C:/Users/mcpro/OneDrive/Documents/WAVE LAB/Code/canvas-animation/src/assets/stimuli/The Sun Face Emoji.png"
     var imgPath2 = "C:/Users/mcpro/OneDrive/Documents/WAVE LAB/Code/canvas-animation/src/assets/stimuli/Dark Blue Moon Emoji.png"
 
-    function drawPNG(shape, imgPathway) {
-        base_img = new Image();
+    base_img1 = new Image();
+    base_img2 = new Image();
+
+    function drawPNG(shape, base_img, imgPathway) {
         base_img.src = imgPathway;
         ctx.beginPath();
         ctx.shadowBlur = 50;
@@ -170,8 +177,8 @@ function createAnimation(
         } else if(shape.type == "square") {
             drawSquare(shape);
         } else {
-            drawPNG(shape, imgPath);
-            drawPNG(shape2, imgPath2);
+            drawPNG(shape, base_img1, imgPath);
+            drawPNG(shape2, base_img2, imgPath2);
         }
         console.log(timeStamp);
         animationFrameId = requestAnimationFrame(animate); // convention for animating loop (recursion!)
