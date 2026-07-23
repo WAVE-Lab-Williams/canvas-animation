@@ -13,13 +13,13 @@ function createAnimation(
     var endx = canvas_width - 60;
     var endy = canvas_height - 60;
 
-    var velocityx = 75; //pixels per frame
-    var velocityy = 50;
+    var velocityx = 7.5; //pixels per frame
+    var velocityy = 5.0;
 
 
     /* Define shape */
 
-    var mainShape = {
+    var shape = {
         type: settings.thisShape,
         size: settings.shapeSize,
         color: settings.shapeColor,
@@ -69,8 +69,8 @@ function createAnimation(
         }; // stop mechanism for location
 
         ctx.clearRect(0,0, canvas_width, canvas_height); //wipes the current frame by clearing context
-        updatePosition(mainShape);
-        drawCircle(mainShape);
+        updatePosition(shape);
+        drawCircle(shape);
         console.log(timeStamp);
         animationFrameId = requestAnimationFrame(animate); // convention for animating loop (recursion!)
     };//end animate

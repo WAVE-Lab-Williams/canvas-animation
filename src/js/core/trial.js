@@ -81,7 +81,8 @@ function runSingleTrial(
                 animationLength: 10000, //ms
                 shapeColor: "ff0040"
             };
-            createAnimation(ctx, h/2, w/2, simple_settings);
+            var animation = createAnimation(ctx, h/2, w/2, simple_settings);
+            animation.start()
 
         },
         canvas_size: [h/2, w/2],
